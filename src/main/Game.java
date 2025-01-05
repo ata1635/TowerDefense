@@ -20,7 +20,7 @@ public class Game extends JFrame {
 		setLocationRelativeTo(null);
 		setTitle("Tower Defense");
 		
-		gameScreen = new GameScreen();
+		gameScreen = new GameScreen(img);
 		add(gameScreen); //method is used to add a component (like a button, text field, label, etc.) to a container (like a frame, panel, or applet).
 	}
 	
