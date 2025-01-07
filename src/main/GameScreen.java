@@ -25,15 +25,14 @@ public class GameScreen extends JPanel{
 			for(int x = 0; x < 10; x++) {
 				sprites.add(img.getSubimage(x * 32, y * 32, 32, 32));
 			}
-		}
-		
+		}	
 	}
 
-	public void paintComponent(Graphics g) {
+	//Gets called by the repaint() method in game.java
+	public void paintComponent(Graphics g) { 
 		super.paintComponent(g);
 //		g.drawImage(sprites.get(19), 0, 0, null);
 //		g.drawImage(img.getSubimage(32 * 9, 32, 32, 32), 0, 0, null);
-		
 		for(int x = 0; x < 20; x++) {
 			for(int y = 0; y < 20; y++) {
 //				g.setColor(getRandomColor());
