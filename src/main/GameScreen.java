@@ -1,55 +1,31 @@
 package main;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.JPanel;
 
-public class GameScreen extends JPanel{
+public class GameScreen extends JPanel {
 	
-	private Random random;
-	private BufferedImage img;
-	private ArrayList<BufferedImage> sprites = new ArrayList<>();
+	private Game game;
+	private Dimension size;
 	
-	public GameScreen(BufferedImage img) {
-		this.img = img;
-		loadSprites();
-		random = new Random();
+	public GameScreen(Game game) {
+		this.game = game;
+		setPanelSize();
 	}
 	
-	private void loadSprites() {
-		for(int y = 0; y < 10; y++) {
-			for(int x = 0; x < 10; x++) {
-				sprites.add(img.getSubimage(x * 32, y * 32, 32, 32));
-			}
-		}	
+	private void setPanelSize() {
+		size = new Dimension(640, 640);
+		setMinimumSize(size);
+		setPreferredSize(size);
+		setMaximumSize(size);
+		
 	}
 
 	//Gets called by the repaint() method in game.java
 	public void paintComponent(Graphics g) { 
 		super.paintComponent(g);
-//		g.drawImage(sprites.get(19), 0, 0, null);
-//		g.drawImage(img.getSubimage(32 * 9, 32, 32, 32), 0, 0, null);
-		for(int x = 0; x < 20; x++) {
-			for(int y = 0; y < 20; y++) {
-//				g.setColor(getRandomColor());
-				g.drawImage(sprites.get(getRandomInt()), x * 32, y * 32, null);
-			}
-		}
-	}
-	
-	private int getRandomInt() {
-		return random.nextInt(100);
-	}
-	
-	private Color getRandomColor() {
-		int r = random.nextInt(256);
-		int g = random.nextInt(256);
-		int b = random.nextInt(256);
-		return new Color(r,g,b);
+		game.getRender().render(g);
 	}
 	
 }
