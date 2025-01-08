@@ -24,17 +24,29 @@ public class Game extends JFrame implements Runnable {
 	private Menu menu;
 	private Playing playing;
 	private Settings settings;
-	
+
 	public Game() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		setTitle("Tower Defense");	
 		initClasses();
 		add(gameScreen); //method is used to add a component (like a button, text field, label, etc.) to a container (like a frame, panel, or applet).
 		pack(); //HAS to be called AFTER any containers or other components, here: add(gameScreen) 
 		setVisible(true); //this always HAS to be at the end
 	}
+
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.initInputs();
+		game.start();
+	}
 	
+	private void start() {
+		gameThread = new Thread(this) {}; //this refers to the run() method
+		gameThread.start(); //Executes thread via start() in Thread.java{c}
+	}
+		
 	private void initClasses() {
 		render = new Render(this);
 		gameScreen = new GameScreen(this);	
@@ -52,23 +64,13 @@ public class Game extends JFrame implements Runnable {
 		addMouseMotionListener(myMouseListener);
 		addKeyListener(keyboardListener);
 		
-		requestFocus();
-	}
-	
-	private void start() {
-		gameThread = new Thread(this) {}; //this refers to the run() method
-		gameThread.start(); //Executes thread via start() in Thread.java(c)
+		requestFocus(); //Has to be here otherwise bugs can happen
 	}
 	
 	private void updateGame() {
 		//System.out.println("Game Updated");
 	}
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.initInputs();
-		game.start();
-	}
 
 	@Override
 	public void run() { //runs the thread
