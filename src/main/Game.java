@@ -16,9 +16,6 @@ public class Game extends JFrame implements Runnable {
 	private final double FPS_SET = 60.0;
 	private final double UPS_SET = 60.0;
 	
-	private MyMouseListener myMouseListener;
-	private KeyboardListener keyboardListener;
-	
 	//Classes
 	private Render render;
 	private Menu menu;
@@ -26,27 +23,16 @@ public class Game extends JFrame implements Runnable {
 	private Settings settings;
 
 	public Game() {
+		initClasses();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setTitle("Tower Defense");	
-		initClasses();
 		add(gameScreen); //method is used to add a component (like a button, text field, label, etc.) to a container (like a frame, panel, or applet).
 		pack(); //HAS to be called AFTER any containers or other components, here: add(gameScreen) 
 		setVisible(true); //this always HAS to be at the end
 	}
 
-	public static void main(String[] args) {
-		Game game = new Game();
-		game.initInputs();
-		game.start();
-	}
-	
-	private void start() {
-		gameThread = new Thread(this) {}; //this refers to the run() method
-		gameThread.start(); //Executes thread via start() in Thread.java{c}
-	}
-		
 	private void initClasses() {
 		render = new Render(this);
 		gameScreen = new GameScreen(this);	
@@ -54,24 +40,22 @@ public class Game extends JFrame implements Runnable {
 		playing = new Playing(this);
 		settings = new Settings(this);
 	}
-
-
-	private void initInputs() {
-		myMouseListener = new MyMouseListener();
-		keyboardListener = new KeyboardListener();
-		
-		addMouseListener(myMouseListener);
-		addMouseMotionListener(myMouseListener);
-		addKeyListener(keyboardListener);
-		
-		requestFocus(); //Has to be here otherwise bugs can happen
+	
+	private void start() {
+		gameThread = new Thread(this) {}; //this refers to the run() method
+		gameThread.start(); //Executes thread via start() in Thread.java{c}
 	}
 	
 	private void updateGame() {
 		//System.out.println("Game Updated");
 	}
-
-
+	
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.gameScreen.initInputs();
+		game.start();
+	}
+	
 	@Override
 	public void run() { //runs the thread
 		//for setting FPS and UPS:

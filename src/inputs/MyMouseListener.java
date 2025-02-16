@@ -4,8 +4,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import main.Game;
+
 public class MyMouseListener implements MouseListener, MouseMotionListener  {
 
+	private Game game;
+	
+	public MyMouseListener(Game game) {
+		this.game = game;
+	}
+	
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -21,10 +29,7 @@ public class MyMouseListener implements MouseListener, MouseMotionListener  {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1) {
-			System.out.println("Left Button");
-		}
-		if(e.getButton() == MouseEvent.BUTTON3) {
-			System.out.println("Right Button");
+			System.out.println("Pos: " + e.getX() + " " + e.getY());
 		}
 	}
 
