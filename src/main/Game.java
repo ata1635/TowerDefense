@@ -43,7 +43,7 @@ public class Game extends JFrame implements Runnable {
 	
 	private void start() {
 		gameThread = new Thread(this) {}; //this refers to the run() method
-		gameThread.start(); //Executes thread via start() in Thread.java{c}
+		gameThread.start(); //Executes thread via start() in Thread.java
 	}
 	
 	private void updateGame() {
@@ -52,7 +52,7 @@ public class Game extends JFrame implements Runnable {
 	
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.gameScreen.initInputs();
+		game.gameScreen.initInputs(); //initInputs() is called explicitly after gameScreen is fully added to the JFrame to avoid issues with input listeners.
 		game.start();
 	}
 	
