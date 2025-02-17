@@ -6,17 +6,30 @@ import java.awt.Rectangle;
 
 public class MyButton {
 	
-	private int x, y, widht, height;
+	public int x, y, widht, height, id;
 	private String text;
 	private Rectangle bounds; //We use it to check if Mouse is inside bounds
 	private boolean mouseOver, mousePressed;
 	
-	public MyButton(String text, int x, int y, int width, int height ) {
+	//For normal buttons
+	public MyButton(String text, int x, int y, int width, int height) {
 		this.text = text;
 		this.x = x;
 		this.y = y;
 		this.widht = width;
 		this.height = height;
+		this.id = -1; //We wont use it but have it here to prevent potential bugs
+		initBounds();
+	}
+	
+	//For Tile-buttons
+	public MyButton(String text, int x, int y, int width, int height, int id) {
+		this.text = text;
+		this.x = x;
+		this.y = y;
+		this.widht = width;
+		this.height = height;
+		this.id = id;
 		initBounds();
 	}
 	
@@ -79,5 +92,8 @@ public class MyButton {
 		return bounds;
 	}
 
+	public int getID() {
+		return id;
+	}
 	
 }
